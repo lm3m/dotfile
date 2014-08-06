@@ -12,4 +12,4 @@ alias ....='pushd ../../.. >> /dev/null'
 alias .....='pushd ../../../.. >> /dev/null'
 alias ls='ls -U1lshagGF --time-style=+%Y.%m.%d\ %H:%M:%S --color'
 
-
+source ~/.bash_prompt
