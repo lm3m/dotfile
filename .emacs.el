@@ -12,7 +12,6 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;;(load-file "~/Code/virtualenvwrapper.el/virtualenvwrapper.el")
 (setq ring-bell-function 'ignore)
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
 ;;(global-visual-line-mode t)
@@ -22,9 +21,6 @@
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(require 'virtualenvwrapper)
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-(venv-initialize-eshell) ;; if you want eshell support
 
 ;(require 'rvm)
 ;(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
