@@ -11,7 +11,8 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 ;;(load-file "~/Code/virtualenvwrapper.el/virtualenvwrapper.el")
 (setq ring-bell-function 'ignore)
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
@@ -35,7 +36,7 @@
 ;(color-theme-initialize)
 ;(require 'color-theme-solarized)
 ;(eval-after-load "color-theme" '(color-theme-solarized-dark))
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-light t)
 ;;(require 'w3m-load)
 ;;(if (= emacs-major-version 23)
 ;;	(require 'w3m-ems)
@@ -44,13 +45,18 @@
 (setq linum-format "%d ")
 (global-linum-mode 1)
 
+(define-key global-map [home] 'beginning-of-line)
+(define-key global-map [end] 'end-of-line)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 115 :width normal :foundry "outline" :family "Menlo"))))
- '(bold ((t (:weight semi-bold)))))
+ '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "outline" :family "Source Code Pro"))))
+ '(bold ((t (:weight semi-bold))))
+ '(org-todo ((t (:background "#c6c6c6" :foreground "#042028" :inverse-video nil :underline nil :slant normal :weight bold))))
+ '(org-upcoming-deadline ((t (:foreground "highlightColor")))))
 
 ;;(custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -63,7 +69,11 @@
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+                `((".*" ,temporary-file-directory t)))
+;(add-to-list 'backup-directory-alist (cons "." "~/.emacs.d/backups"))
+;;(setq backup-directory-alist (cons "." "~/.emacs.d/backups"))
+;(setq auto-save-file-name-transforms
+;      `((".*" ,temporary-file-directory t)))
 
 ;; set showing full path name in title bar
 (setq-default
@@ -122,7 +132,10 @@
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(foreground-color "#52676f")
  '(org-directory "~/Dropbox/org")
- '(org-mobile-directory "~/Dropbox/Apps/MobileOrg")
- '(org-mobile-files org-agenda-files)
- '(org-mobile-inbox-for-pull "~/Dropbox/org/top.org")
+ '(org-mobile-directory "~/Dropbox/Apps/MobileOrg" t)
+ '(org-mobile-files org-agenda-files t)
+ '(org-mobile-inbox-for-pull "~/Dropbox/org/top.org" t)
  '(weblogger-config-alist (quote (("default" "http://technology-hates-you.com/lm3m/xmlrpc.php" "lm3m" "" "1")))))
+(setq org-agenda-prefix-format
+      '((agenda . " %i %?-12t% s")
+        (timeline . "  % s")))
