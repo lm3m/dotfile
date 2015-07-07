@@ -1,6 +1,5 @@
 (require 'ido)
 (ido-mode t)
-(tool-bar-mode -1)
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'custom-theme-load-path "~/Code/emacs-color-theme-solarized/")
 
@@ -11,8 +10,8 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;(when (memq window-system '(mac ns))
+;  (exec-path-from-shell-initialize 1))
 ;;(load-file "~/Code/virtualenvwrapper.el/virtualenvwrapper.el")
 (setq ring-bell-function 'ignore)
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
@@ -33,7 +32,10 @@
 ;(color-theme-initialize)
 ;(require 'color-theme-solarized)
 ;(eval-after-load "color-theme" '(color-theme-solarized-dark))
-(load-theme 'solarized-light t)
+(if (display-graphic-p)
+    '(load-theme 'solarized-light t)
+    '(tool-bar-mode -1))
+;
 ;;(require 'w3m-load)
 ;;(if (= emacs-major-version 23)
 ;;	(require 'w3m-ems)
@@ -95,6 +97,15 @@
 (setq org-agenda-files (list "~/Dropbox/org/top.org"))
 (setq org-log-done 'note)
 
+(setq org-capture-templates
+  '(    ;; ... other templates
+    ("j" "Journal Entry"
+         entry (file+datetree "~/Dropbox/org/journal.org")
+         "* Event: %?\n\n  %i\n\n  From: %a"
+         :empty-lines 1)
+        ;; ... other templates
+    ))
+
 ;; Set to the location of your Org files on your local system
 (setq org-directory "~/Dropbox/org/")
 ;; Set to the name of the file where new notes will be stored
@@ -124,15 +135,20 @@
  ;; If there is more than one, they won't work right.
  '(background-color "#fcf4dc")
  '(background-mode light)
- '(compile-command "python /Users/lukas/code/Broadway/build2/scons-2.3.0/Scripts/scons --vars=/Users/lukas/code/Broadway/local-vars.py -U -s --verbose build")
+ '(compile-command
+   "python /Users/lukas/code/Broadway/build2/scons-2.3.0/Scripts/scons --vars=/Users/lukas/code/Broadway/local-vars.py -U -s --verbose build")
  '(cursor-color "#52676f")
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(foreground-color "#52676f")
  '(org-directory "~/Dropbox/org")
  '(org-mobile-directory "~/Dropbox/Apps/MobileOrg" t)
  '(org-mobile-files org-agenda-files t)
  '(org-mobile-inbox-for-pull "~/Dropbox/org/top.org" t)
- '(weblogger-config-alist (quote (("default" "http://technology-hates-you.com/lm3m/xmlrpc.php" "lm3m" "" "1")))))
+ '(weblogger-config-alist
+   (quote
+    (("default" "http://technology-hates-you.com/lm3m/xmlrpc.php" "lm3m" "" "1")))))
 (setq org-agenda-prefix-format
       '((agenda . " %i %?-12t% s")
         (timeline . "  % s")))
