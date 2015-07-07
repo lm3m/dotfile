@@ -1,4 +1,3 @@
-. /usr/local/bin/virtualenvwrapper.sh
 # If id command returns zero, you’ve root access.
 PS1="[\\w] "
 
