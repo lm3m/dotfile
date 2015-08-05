@@ -1,7 +1,5 @@
 (require 'ido)
 (ido-mode t)
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'custom-theme-load-path "~/Code/emacs-color-theme-solarized/")
 
 (require 'package)
 (add-to-list 'package-archives
@@ -10,37 +8,16 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-;(when (memq window-system '(mac ns))
-;  (exec-path-from-shell-initialize 1))
-;;(load-file "~/Code/virtualenvwrapper.el/virtualenvwrapper.el")
 (setq ring-bell-function 'ignore)
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
-;;(global-visual-line-mode t)
-;;(add-hook 'eshell-preoutput-filter-functions
-;;           'ansi-color-filter-apply)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (setq-default indent-tabs-mode nil)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
+(when (display-graphic-p)
+  (load-theme 'solarized-light t)
+  (tool-bar-mode -1))
 
-;(require 'rvm)
-;(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
-;(load-file "~/.emacs.d/lisp/weblogger.el")
-
-;(add-to-list 'load-path "~/Dropbox/PlatformIndepenence/global/color-theme-6.6.0")
-;(require 'color-theme)
-;(color-theme-initialize)
-;(require 'color-theme-solarized)
-;(eval-after-load "color-theme" '(color-theme-solarized-dark))
-(if (display-graphic-p)
-    '(load-theme 'solarized-light t)
-    '(tool-bar-mode -1))
-;
-;;(require 'w3m-load)
-;;(if (= emacs-major-version 23)
-;;	(require 'w3m-ems)
-;;  (require 'w3m))
-
+(setq inhibit-startup-screen t)
 (setq linum-format "%d ")
 (global-linum-mode 1)
 
@@ -57,28 +34,16 @@
  '(org-todo ((t (:background "#c6c6c6" :foreground "#042028" :inverse-video nil :underline nil :slant normal :weight bold))))
  '(org-upcoming-deadline ((t (:foreground "highlightColor")))))
 
-;;(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-;; '(inhibit-startup-screen t))
-
 ;; move autosave dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
-;(add-to-list 'backup-directory-alist (cons "." "~/.emacs.d/backups"))
-;;(setq backup-directory-alist (cons "." "~/.emacs.d/backups"))
-;(setq auto-save-file-name-transforms
-;      `((".*" ,temporary-file-directory t)))
-
 ;; set showing full path name in title bar
 (setq-default
  frame-title-format
- (list '((buffer-file-name " %f" (dired-directory 
-	 			  dired-directory
+ (list '((buffer-file-name " %f" (dired-directory
+        			  dired-directory
 				  (revert-buffer-function " %b"
 				  ("%b - Dir:  " default-directory)))))))
 (setq-default
@@ -89,6 +54,7 @@
                                   ("%b - Dir:  " default-directory)))))))
 
 ;; Org mode stuff
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -101,7 +67,7 @@
   '(    ;; ... other templates
     ("j" "Journal Entry"
          entry (file+datetree "~/Dropbox/org/journal.org")
-         "* Event: %?\n\n  %i\n\n  From: %a"
+         "* %<%I:%M %P> - %?\n\n  From: %l"
          :empty-lines 1)
         ;; ... other templates
     ))
