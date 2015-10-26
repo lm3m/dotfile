@@ -1,0 +1,112 @@
+atk 2.14.0 2.16.0 2.18.0
+autoconf 2.69
+automake 1.15
+bash 4.3.33 4.3.42
+beecrypt 4.2.1_2 4.2.1_3
+berkeley-db 6.1.19 6.1.26
+brew-cask 0.37.1 0.42.0 0.45.0 0.47.0 0.51.1 0.53.3 0.56.0 0.57.0 0.58.0
+byobu 5.90 5.94
+cairo 1.14.0 1.14.2_1
+cask 0.7.2 0.7.2_1
+cheat 2.1.14 2.1.7
+cmake 3.1.2 3.3.1 3.3.2
+colordiff 1.0.13 1.0.15
+coreutils 8.23_1 8.24
+ctags 5.8_1
+dash 0.5.8
+debianutils 4.4 4.5.1
+dpkg 1.17.21 1.18.2 1.18.3
+ec2-api-tools 1.7.3.0 1.7.4.0
+emacs 24.4 24.5
+erlang 17.4.1 18.0.3 18.1
+findutils 4.4.2
+fontconfig 2.11.1
+freetype 2.5.5 2.6_1
+gcal 3.6.3 4
+gd 2.1.0_2 2.1.1
+gdbm 1.11
+gdk-pixbuf 2.30.8 2.32.1
+gettext 0.19.4 0.19.5.1 0.19.6
+git 2.3.0 2.5.1 2.6.1 2.6.2
+glib 2.42.1 2.44.1 2.46.0 2.46.1
+gmp 6.0.0a
+gnome-icon-theme 3.16.2.1 3.18.0
+gnu-sed 4.2.2
+gnu-tar 1.28
+gnupg 1.4.18_1 1.4.19
+gnuplot 5.0.0 5.0.1
+go 1.4.2 1.5 1.5.1
+gobject-introspection 1.42.0 1.44.0 1.46.0
+graphviz 2.38.0
+grep 2.20 2.21
+gsettings-desktop-schemas 3.16.1 3.18.0 3.18.1
+gtk+ 2.24.25 2.24.28_2 2.24.28_3
+gtk+3 3.16.6 3.18.2
+gtk-mac-integration 2.0.8
+gtksourceview 2.10.5 2.10.5_1
+gtksourceview3 3.16.1 3.18.1
+harfbuzz 0.9.38 0.9.41 1.0.3 1.0.4
+hicolor-icon-theme 0.15
+htop-osx 0.8.2.4 0.8.2.7
+icu4c 54.1 55.1
+intltool 0.50.2 0.51.0
+iperf 2.0.5
+jmeter 2.12 2.13
+jpeg 8d
+libepoxy 1.3.1
+libevent 2.0.22
+libffi 3.0.13
+libmagic 5.22 5.23 5.25
+libpng 1.6.16 1.6.17 1.6.18
+libtasn1 4.2 4.5 4.7
+libtiff 4.0.3 4.0.4 4.0.6
+libtool 2.4.6
+lua 5.2.3_1 5.2.4_1
+maven 3.2.5 3.3.3
+meld 1.8.6 3.14.0 3.14.1
+mercurial 3.3 3.5.1 3.5.2
+moreutils 0.55 0.57
+nano 2.3.6 2.4.2_1
+ncurses 5.9 6.0
+neon 0.30.1
+netcat 0.7.1
+netcat6 1.0
+newt 0.52.18
+node 0.12.0 0.12.7 4.2.0 4.2.1
+openssl 1.0.2 1.0.2d_1
+ossp-uuid 1.6.2_1
+pandoc 1.15.0.6 1.15.1.1
+pango 1.36.8 1.36.8_2 1.38.1
+pcre 8.36 8.37
+pixman 0.32.6 0.32.8
+pkg-config 0.28
+plantuml 8018 8024 8029
+popt 1.16
+pv 1.5.7 1.6.0
+py2cairo 1.10.0 1.10.0_1
+pygobject 2.28.6
+pygobject3 3.16.2 3.18.0 3.18.2
+pygtk 2.24.0 2.24.0_1
+pygtksourceview 2.10.0 2.10.1_1
+python 2.7.10_2 2.7.9
+rabbitmq 3.4.4 3.5.4 3.5.6
+rabbitmq-c 0.5.2 0.7.0
+rarian 0.8.1
+readline 6.3.8
+redis 2.8.19 3.0.3 3.0.4 3.0.5
+rpm 5.4.14 5.4.15
+rpm2cpio 1.3
+rust 1.0.0-alpha.2 1.2.0 1.3.0
+s-lang 2.3.0
+sqlite 3.8.10.2 3.8.11.1 3.8.8.2 3.9.1
+sshpass 1.05
+swig 3.0.5 3.0.7
+the_silver_searcher 0.29.1 0.30.0 0.31.0
+tig 2.0.3 2.1.1
+tmux 1.9a 2.0 2.1
+tree 1.7.0
+tsung 1.5.1 1.6.0
+unixodbc 2.3.2_1
+wget 1.16.1 1.16.3
+wxmac 3.0.2
+xz 5.2.0 5.2.1 5.2.2
