@@ -9,14 +9,22 @@
 (require 'use-package)
 
 (use-package langtool :ensure t :defer t)
-(setq langtool-language-tool-jar "D:/LanguageTool-3.7/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "C:/bin/LanguageTool-3.7/languagetool-commandline.jar")
+;;(setq langtool-language-tool-jar "D:/LanguageTool-3.7/languagetool-commandline.jar")
 (setq langtool-default-language "en-US")
+
+;; git stuff
+(use-package magit :ensure t :defer t)
+(use-package magit-filenotify :ensure t :defer t)
+(use-package magit-find-file :ensure t :defer t)
+(use-package git-timemachine :ensure t :defer t)
 
 ;; improved file and buffer open stuff
 (use-package ido :ensure t :defer t)
 (ido-mode t)
 
 (use-package wc-mode :ensure t :defer t)
+(setq wc-modeline-format "Words:%w/%tw ")
 
 ;; turn off the bell
 (setq ring-bell-function 'ignore)
@@ -46,7 +54,7 @@
 (setq inhibit-startup-screen t)
 
 ;; always show line numbers
-(setq linum-format "%d")
+(setq linum-format "%d ")
 (global-linum-mode 1)
 (setq line-number-mode nil)
 
@@ -127,9 +135,6 @@
  '(org-todo ((t (:background "#c6c6c6" :foreground "#042028" :inverse-video nil :underline nil :slant normal :weight bold))))
  '(org-upcoming-deadline ((t (:foreground "highlightColor")))))
 
-
-
-
 ;; move autosave dir
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
@@ -194,103 +199,43 @@
 (setq eshell-cmpl-ignore-case t)
 '(eshell-glob-case-insensitive t)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#657b83" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#fdf6e3"))
- '(background-color "#fcf4dc")
- '(background-mode light)
- '(centered-window-mode t)
- '(compilation-message-face (quote default))
- '(compile-command
-   "python /Users/lukas/code/Broadway/build2/scons-2.3.0/Scripts/scons --vars=/Users/lukas/code/Broadway/local-vars.py -U -s --verbose build")
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#657b83")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
- '(cursor-color "#52676f")
- '(custom-enabled-themes (quote (sanityinc-solarized-light)))
- '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
- '(fci-rule-color "#eee8d5")
- '(foreground-color "#52676f")
- '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#fdf6e3" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
- '(highlight-symbol-foreground-color "#586e75")
- '(highlight-tail-colors
-   (quote
-    (("#eee8d5" . 0)
-     ("#B4C342" . 20)
-     ("#69CABF" . 30)
-     ("#69B7F0" . 50)
-     ("#DEB542" . 60)
-     ("#F2804F" . 70)
-     ("#F771AC" . 85)
-     ("#eee8d5" . 100))))
- '(hl-bg-colors
-   (quote
-    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
- '(hl-fg-colors
-   (quote
-    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
- '(magit-diff-use-overlays nil)
- '(nrepl-message-colors
-   (quote
-    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
- '(org-directory "~/Dropbox/org" t)
- '(org-mobile-directory "~/Dropbox/Apps/MobileOrg" t)
- '(org-mobile-files org-agenda-files t)
- '(org-mobile-inbox-for-pull "~/Dropbox/org/top.org" t)
- '(package-selected-packages
-   (quote
-    (flyspell-lazy company color-theme-sanityinc-solarized color-theme-solarized habitica centered-window-mode magit wc-mode sublimity minimap solarized-theme)))
- '(pos-tip-background-color "#eee8d5")
- '(pos-tip-foreground-color "#586e75")
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(term-default-bg-color "#fdf6e3")
- '(term-default-fg-color "#657b83")
- '(vc-annotate-background nil)
- '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#dc322f")
-     (40 . "#cb4b16")
-     (60 . "#b58900")
-     (80 . "#859900")
-     (100 . "#2aa198")
-     (120 . "#268bd2")
-     (140 . "#d33682")
-     (160 . "#6c71c4")
-     (180 . "#dc322f")
-     (200 . "#cb4b16")
-     (220 . "#b58900")
-     (240 . "#859900")
-     (260 . "#2aa198")
-     (280 . "#268bd2")
-     (300 . "#d33682")
-     (320 . "#6c71c4")
-     (340 . "#dc322f")
-     (360 . "#cb4b16"))))
- '(vc-annotate-very-old-color nil)
- '(wc-modeline-format "Words: %w/%tw ")
- '(weblogger-config-alist
-   (quote
-    (("default" "http://technology-hates-you.com/lm3m/xmlrpc.php" "lm3m" "" "1"))))
- '(weechat-color-list
-   (quote
-    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496")))
- '(xterm-color-names
-   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"])
- '(xterm-color-names-bright
-   ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"]))
+(use-package projectile :ensure t :defer t)
+(use-package org-projectile :ensure t :defer t)
+(use-package ibuffer-projectile :ensure t :defer t)
+(projectile-global-mode 1)
 
+(use-package company :ensure t :defer t)
+(add-hook 'after-init-hook 'global-company-mode)
+
+(use-package clang-format :ensure t :defer t)
+
+(use-package irony :ensure t :defer t)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(use-package cmake-ide :ensure t :defer t)
+(cmake-ide-setup)
+
+(use-package company-irony :ensure t :defer t)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;; Windows performance tweaks
+;;
+(when (boundp 'w32-pipe-read-delay)
+  (setq w32-pipe-read-delay 0))
+;; Set the buffer size to 64K on Windows (from the original 4K)
+(when (boundp 'w32-pipe-buffer-size)
+  (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
+
+;; c# goo
+(setq omnisharp-server-executable-path "C:\\omnisharp-win-x64-net46.1.9-beta\\OmniSharp.exe")
+(load-library "omnisharp")
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(setq omnisharp-debug t)
+;;(setq omnisharp-use-http t)
+
+;; one line at a time
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) 
+;; don't accelerate scrolling
+(setq mouse-wheel-progressive-speed nil)
