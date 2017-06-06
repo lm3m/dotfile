@@ -23,6 +23,8 @@
 (use-package ido :ensure t :defer t)
 (ido-mode t)
 
+;;(use-package color-theme-sanityinc-solarized-light :ensure t :defer t)
+
 (use-package wc-mode :ensure t :defer t)
 (setq wc-modeline-format "Words:%w/%tw ")
 
@@ -39,24 +41,24 @@
 ;; my wordstar mode
 (require 'lws-mode)
 
-;; use ansi colors in console mode
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; tab indent mode
 (setq-default indent-tabs-mode nil)
 
 ;; when in graphics, aka not console mode
 (when (display-graphic-p)
-  (load-theme 'sanityinc-solarized-light t)
+  (load-theme 'sanityinc-solarized-dark t)
   (tool-bar-mode -1))
 
 ;; disable the startup screen
 (setq inhibit-startup-screen t)
 
 ;; always show line numbers
-(setq linum-format "%d ")
-(global-linum-mode 1)
-(setq line-number-mode nil)
+;;(setq linum-format "%d ")
+;;(global-linum-mode 1)
+;;(setq line-number-mode nil)
+(use-package smart-mode-line :ensure t :defer t)
+(smart-mode-line-enable)
 
 ;; make sure home and end are line scoped
 (define-key global-map [home] 'beginning-of-line)
@@ -123,6 +125,8 @@
 (use-package flyspell-lazy :ensure t :defer t)
 (flyspell-lazy-mode 1)
 
+;;(set-frame-parameter nil 'background-mode 'dark)
+
 ;; set the font
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -131,7 +135,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "outline" :family "Source Code Pro"))))
  '(bold ((t (:weight semi-bold))))
- '(fringe ((t (:background "#fdf6e3"))))
  '(org-todo ((t (:background "#c6c6c6" :foreground "#042028" :inverse-video nil :underline nil :slant normal :weight bold))))
  '(org-upcoming-deadline ((t (:foreground "highlightColor")))))
 
@@ -228,12 +231,15 @@
 (when (boundp 'w32-pipe-buffer-size)
   (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
 
-;; c# goo
-(setq omnisharp-server-executable-path "C:\\omnisharp-win-x64-net46.1.9-beta\\OmniSharp.exe")
-(load-library "omnisharp")
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-(setq omnisharp-debug t)
-;;(setq omnisharp-use-http t)
+(if (eq window-system 'w32)
+    (progn
+      ;; c# goo
+      (setq omnisharp-server-executable-path "C:\\omnisharp-win-x64-net46.1.9-beta\\OmniSharp.exe")
+      (load-library "omnisharp")
+      (add-hook 'csharp-mode-hook 'omnisharp-mode)
+      (setq omnisharp-debug t)
+      ;;(setq omnisharp-use-http t)
+      ))
 
 ;; one line at a time
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) 
