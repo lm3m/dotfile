@@ -1,3 +1,42 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#839496" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"))
+ '(custom-safe-themes
+   (quote
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(fci-rule-color "#073642")
+ '(package-selected-packages
+   (quote
+    (define-word writegood-mode wc-mode use-package sublimity solarized-theme smart-mode-line org-projectile org-bullets org-autolist magit-find-file magit-filenotify langtool ibuffer-projectile git-timemachine flyspell-lazy company-irony color-theme-solarized color-theme-sanityinc-solarized cmake-ide clang-format centered-window-mode)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#cb4b16")
+     (60 . "#b58900")
+     (80 . "#859900")
+     (100 . "#2aa198")
+     (120 . "#268bd2")
+     (140 . "#d33682")
+     (160 . "#6c71c4")
+     (180 . "#dc322f")
+     (200 . "#cb4b16")
+     (220 . "#b58900")
+     (240 . "#859900")
+     (260 . "#2aa198")
+     (280 . "#268bd2")
+     (300 . "#d33682")
+     (320 . "#6c71c4")
+     (340 . "#dc322f")
+     (360 . "#cb4b16"))))
+ '(vc-annotate-very-old-color nil))
+
 ;; package manager stuff
 (require 'package)
 (add-to-list 'package-archives
@@ -9,8 +48,8 @@
 (require 'use-package)
 
 (use-package langtool :ensure t :defer t)
-(setq langtool-language-tool-jar "C:/bin/LanguageTool-3.7/languagetool-commandline.jar")
-;;(setq langtool-language-tool-jar "D:/LanguageTool-3.7/languagetool-commandline.jar")
+;;(setq langtool-language-tool-jar "C:/bin/LanguageTool-3.7/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "D:/LanguageTool-3.7/languagetool-commandline.jar")
 (setq langtool-default-language "en-US")
 
 ;; git stuff
@@ -46,19 +85,25 @@
 (setq-default indent-tabs-mode nil)
 
 ;; when in graphics, aka not console mode
-(when (display-graphic-p)
-  (load-theme 'sanityinc-solarized-dark t)
-  (tool-bar-mode -1))
 
 ;; disable the startup screen
 (setq inhibit-startup-screen t)
 
 ;; always show line numbers
-;;(setq linum-format "%d ")
-;;(global-linum-mode 1)
-;;(setq line-number-mode nil)
+(setq linum-format "%d ")
+(global-linum-mode 1)
+(setq line-number-mode nil)
 (use-package smart-mode-line :ensure t :defer t)
-(smart-mode-line-enable)
+(setq sml/theme 'dark)
+(setq sml/theme 'light)
+(setq sml/theme 'respectful)
+(sml/setup)
+
+(when (display-graphic-p)
+  (load-theme 'sanityinc-solarized-dark t)
+  (load-theme 'smart-mode-line-respectful t)    
+  (tool-bar-mode -1))
+
 
 ;; make sure home and end are line scoped
 (define-key global-map [home] 'beginning-of-line)
@@ -91,9 +136,12 @@
 (add-hook 'wordstar-mode-hook 'ltoggle-line-spacing)
 (add-hook 'wordstar-mode-hook 'flyspell-mode)
 ;; (add-hook 'text-mode-hook 'wordstar-mode)
-(add-hook 'wordstar-mode-hook 'centered-window-mode t)
+(add-hook 'wordstar-mode-hook 'centered-window-mode)
 (add-hook 'wordstar-mode-hook 'electric-pair-mode)
-(add-hook 'wordstar-mode-hook 'wc-mode t)
+(add-hook 'wordstar-mode-hook 'wc-mode)
+(add-hook 'wordstar-mode-hook (lambda () (company-mode -1)))
+(add-hook 'wordstar-mode-hook (lambda () (linum-mode -1)))
+
 
 (defun my-flyspell-hook ()
   (define-key flyspell-mode-map "\C-c\$" nil)
@@ -135,6 +183,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "outline" :family "Source Code Pro"))))
  '(bold ((t (:weight semi-bold))))
+ '(fringe ((t (:background "#002b36"))))
  '(org-todo ((t (:background "#c6c6c6" :foreground "#042028" :inverse-video nil :underline nil :slant normal :weight bold))))
  '(org-upcoming-deadline ((t (:foreground "highlightColor")))))
 
@@ -231,15 +280,15 @@
 (when (boundp 'w32-pipe-buffer-size)
   (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
 
-(if (eq window-system 'w32)
-    (progn
-      ;; c# goo
-      (setq omnisharp-server-executable-path "C:\\omnisharp-win-x64-net46.1.9-beta\\OmniSharp.exe")
-      (load-library "omnisharp")
-      (add-hook 'csharp-mode-hook 'omnisharp-mode)
-      (setq omnisharp-debug t)
-      ;;(setq omnisharp-use-http t)
-      ))
+;; (if (eq window-system 'w32)
+;;     (progn
+;;       ;; c# goo
+;;       (setq omnisharp-server-executable-path "C:\\omnisharp-win-x64-net46.1.9-beta\\OmniSharp.exe")
+;;       (load-library "omnisharp")
+;;       (add-hook 'csharp-mode-hook 'omnisharp-mode)
+;;       (setq omnisharp-debug t)
+;;       ;;(setq omnisharp-use-http t)
+;;       ))
 
 ;; one line at a time
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) 
