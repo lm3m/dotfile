@@ -111,11 +111,11 @@ _mk_prompt() {
     if [ "$SSH_CONNECTION" ]; then 
        PS1="@\h:$PS1"
     else
-       PS1=":$PS1"
+       PS1="$PS1"
     fi
 
     if [[ ! -z "$prefix" ]]; then
-        PS1="${prefix[@]}$PS1"
+        PS1="${prefix[@]}:$PS1"
     fi
   
     PS1="[$PS1] "
